@@ -111,7 +111,7 @@ void utils::write_to_uint64_t(const std::vector<uint8_t>& msg, std::vector<uint6
 			tmp = 0;
 		}
 
-		tmp |= ((uint64_t)msg[i] << (7-i%8)*8);
+		tmp |= ((uint64_t)msg[i] << (i%8)*8);
 	}
 
 	uint8_t pad = (msg.size()%8);
@@ -126,7 +126,7 @@ void utils::write_to_uint64_t(const std::vector<uint8_t>& msg, std::vector<uint6
 
 		for (uint i=0; i < 8; ++i)
 		{
-			tmp |= ((uint64_t)padv[i] << (7-i)*8);
+			tmp |= ((uint64_t)padv[i] << (i)*8);
 		}
 		std::cout <<"size: " << padv.size() << " tmp: " <<  tmp << std::endl;
 
@@ -139,15 +139,24 @@ void utils::write_to_uint64_t(const std::vector<uint8_t>& msg, std::vector<uint6
 void utils::write_to_uint8_t(const std::vector<uint64_t>& msg,
 		std::vector<uint8_t>& cmsg)
 {
-	for(auto m : msg)
+	std::cout <<"size: " << msg.size() << std::endl;
+
+	for(uint i=0; i < msg.size(); ++i)
 	{
-		uint64_t mcopy(m);
-		for(uint i=7; i>=0; --i)
+		uint64_t m_copy(msg[i]);
+
+		for(int j=7; j>=0; --j)
 		{
-			cmsg.push_back(uint8_t(m));
-			mcopy >>= 8;
+			cmsg.push_back(uint8_t(m_copy));
+			m_copy >>= 8;
+			std::cout <<"m_copy: " << int(uint8_t(m_copy)) << std::endl;
+
 		}
 	}
+	utils::print_vector(msg);
+	std::cout <<"size: " << cmsg.size() << std::endl;
+
+	cmsg.push_back(10); //EOL
 	utils::print_vector(cmsg);
 }
 
@@ -161,5 +170,6 @@ bool utils::read_from_file(char* file_name, std::vector<uint8_t>& v)
 
 bool utils::write_to_file(char* file_name, const std::vector<uint8_t>& v)
 {
-
+	std::ofstream file(file_name, std::ios::binary);
+	std::copy(v.begin(), v.end(), std::ostreambuf_iterator<char>(file));
 }

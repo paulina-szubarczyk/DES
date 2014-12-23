@@ -127,18 +127,47 @@ BOOST_AUTO_TEST_SUITE_END()
 
 BOOST_AUTO_TEST_SUITE(files)
 
-BOOST_AUTO_TEST_CASE(read)
+BOOST_AUTO_TEST_CASE(read_write)
 {
-	std::vector<uint8_t> v;
+	std::vector<uint8_t> v,v1;
 	utils::read_from_file("msg",v);
 	std::vector<uint64_t> v64;
 	utils::write_to_uint64_t(v,v64);
-	utils::write_to_uint8_t(v64,v);
+	utils::write_to_uint8_t(v64,v1);
+	utils::write_to_file("msg2",v1);
 }
 
-BOOST_AUTO_TEST_CASE(write)
+BOOST_AUTO_TEST_CASE(DES_to_file)
 {
+	std::cout << "==================BEGIN===================\n";
+	std::vector<uint8_t> v,v1,v2,v3;
 
+	utils::read_from_file("msg",v);
+
+	std::vector<uint64_t> v64m1, v64c1, v64c2, v64m2;
+
+	utils::write_to_uint64_t(v,v64m1);
+
+	DES des(utils::generate_key());
+
+	for(auto m : v64m1)
+		v64c1.push_back(des.encrypt(m));
+
+	utils::write_to_uint8_t(v64c1,v1);
+
+	utils::write_to_file("encrypt",v1);
+
+	utils::read_from_file("encrypt",v2);
+
+	utils::write_to_uint64_t(v2,v64c2);
+
+	for(auto c : v64c2)
+		v64m2.push_back(des.decrypt(c));
+
+	v64m2.pop_back();
+	utils::write_to_uint8_t(v64m2,v3);
+
+	utils::write_to_file("decrypt",v3);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
