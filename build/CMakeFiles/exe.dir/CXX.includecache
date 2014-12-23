@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/paulina/workspace/c++/PTKB/src/utils.cpp
+utils.h
+/home/paulina/workspace/c++/PTKB/src/utils.h
+
+/home/paulina/workspace/c++/PTKB/src/utils.h
+cstdint
+-
+vector
+-
+iostream
+-
+cstdlib
+-
+ctime
+-
+fstream
+-
+iterator
+-
+algorithm
+-
+

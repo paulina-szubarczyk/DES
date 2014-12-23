@@ -1,0 +1,2 @@
+/home/paulina/workspace/c++/PTKB/build/CMakeFiles/exe.dir
+/home/paulina/workspace/c++/PTKB/build/CMakeFiles/test.dir
