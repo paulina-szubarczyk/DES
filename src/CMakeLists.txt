@@ -24,8 +24,12 @@ set(SOURCES
 
 add_executable(exe ${SOURCES} main.cpp)
 add_executable(test ${SOURCES} test.cpp)
+add_executable(signate ${SOURCES} signature.cpp)
+#add_executable(verifie ${SOURCES} verifier.cpp)
 
 target_link_libraries(exe ${Boost_LIBRARIES})
 target_link_libraries(test ${Boost_LIBRARIES})
+target_link_libraries(signate ${Boost_LIBRARIES})
+#target_link_libraries(verifie ${Boost_LIBRARIES})
 
 

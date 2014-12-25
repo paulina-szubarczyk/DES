@@ -28,6 +28,8 @@ public:
 
 	static bool read_from_file(char* file_name, std::vector<uint8_t>& v);
 	static bool write_to_file(char* file_name, const std::vector<uint8_t>& v);
+	static bool write_header_to_file(char* file_name, int message_size, bool new_file = false);
+	static bool write_keys_to_file(char* file_name, const std::vector<uint8_t>& v);
 
 private:
 	template<class T> static void print_vector(std::vector<T> v)

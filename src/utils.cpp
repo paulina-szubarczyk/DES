@@ -173,3 +173,14 @@ bool utils::write_to_file(char* file_name, const std::vector<uint8_t>& v)
 	std::ofstream file(file_name, std::ios::binary);
 	std::copy(v.begin(), v.end(), std::ostreambuf_iterator<char>(file));
 }
+
+bool utils::write_header_to_file(char* file_name, int message_size, bool new_file)
+{
+	// TODO impelement this
+}
+
+bool utils::write_keys_to_file(char* file_name, const std::vector<uint8_t>& v)
+{
+	// TODO impelement this
+
+}
