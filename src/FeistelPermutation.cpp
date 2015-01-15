@@ -23,5 +23,5 @@ void FeistelPermutation::permutate(uint64_t& inout)
 		uint64_t bit = (in >> per) & one;
 		inout	|= (bit << (31-i));
 	}
-	std::cout << std::endl;
+//	std::cout << std::endl;
 }

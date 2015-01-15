@@ -19,16 +19,16 @@ struct msg
 };
 
 BOOST_AUTO_TEST_SUITE(utils_suite)
-BOOST_AUTO_TEST_CASE(write)
-{
-	msg m;
-
-	BOOST_CHECK_EQUAL(m.m = utils::write_to_uint64_t(m.smsg), 3544952156018063160);
-
-	utils::write_to_uint8_t(m.m,m.scr);
-
-	BOOST_CHECK_EQUAL(std::string(m.scr,m.scr+8), std::string(m.smsg, m.smsg+8));
-}
+//BOOST_AUTO_TEST_CASE(write)
+//{
+//	msg m;
+//
+//	BOOST_CHECK_EQUAL(m.m = utils::write_to_uint64_t(m.smsg), 3544952156018063160);
+//
+//	utils::write_to_uint8_t(m.m,m.scr);
+//
+//	BOOST_CHECK_EQUAL(std::string(m.scr,m.scr+8), std::string(m.smsg, m.smsg+8));
+//}
 
 BOOST_AUTO_TEST_CASE(to_zero)
 {
@@ -55,13 +55,13 @@ BOOST_AUTO_TEST_CASE(halfs)
 			3544952156018063160);
 }
 
-BOOST_AUTO_TEST_CASE(parity_bit)
-{
-	msg m;
-	m.key = utils::generate_key();
-	utils::write_to_uint8_t(m.key,m.skey);
-	utils::print_as_uint(m.skey,8);
-}
+//BOOST_AUTO_TEST_CASE(parity_bit)
+//{
+//	msg m;
+//	m.key = utils::generate_key();
+//	utils::write_to_uint8_t(m.key,m.skey);
+//	utils::print_as_uint(m.skey,8);
+//}
 
 BOOST_AUTO_TEST_SUITE_END()
 
@@ -143,7 +143,7 @@ BOOST_AUTO_TEST_CASE(DES_to_file)
 	std::cout << "==================BEGIN===================\n";
 	std::vector<uint8_t> v,v1,v2,v3;
 
-	utils::read_from_file("msg",v);
+	utils::read_msg_from_file("msg",v);
 
 	std::vector<uint64_t> v64m1, v64c1, v64c2, v64m2;
 
@@ -156,9 +156,9 @@ BOOST_AUTO_TEST_CASE(DES_to_file)
 
 	utils::write_to_uint8_t(v64c1,v1);
 
-	utils::write_to_file("encrypt",v1);
+	utils::write_to_file("encrypt1",v1);
 
-	utils::read_from_file("encrypt",v2);
+	utils::read_msg_from_file("encrypt1",v2);
 
 	utils::write_to_uint64_t(v2,v64c2);
 
@@ -168,7 +168,7 @@ BOOST_AUTO_TEST_CASE(DES_to_file)
 	v64m2.pop_back();
 	utils::write_to_uint8_t(v64m2,v3);
 
-	utils::write_to_file("decrypt",v3);
+	utils::write_to_file("decrypt1",v3);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

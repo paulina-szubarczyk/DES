@@ -6,8 +6,8 @@ DES::DES(uint64_t key):  k(key),g(k) {}
 
 uint64_t DES::shift(uint64_t L, uint64_t R)
 {
-	std::cout << "R: " << R << "\t" ;
-	std::cout << "L: " << L << "\n" ;
+//	std::cout << "R: " << R << "\t" ;
+//	std::cout << "L: " << L << "\n" ;
 
 	return (R << 32) | L ;
 }
@@ -16,7 +16,7 @@ void DES::round(uint8_t i, uint64_t& c)
 {
 	uint64_t key = g.generateKey(i);
 
-	std::cout << "key: " << key << "\t" ;
+//	std::cout << "key: " << key << "\t" ;
 
 	uint64_t Ri = utils::right_half(c);
 
@@ -41,7 +41,7 @@ uint64_t DES::encrypt(uint64_t m)
 	for(int i=0; i<16; ++i)
 
 	{
-		std::cout << "ROUND i: " << i << "\t";
+//		std::cout << "ROUND i: " << i << "\t";
 
 		round((int8_t)i,c);
 
@@ -56,7 +56,7 @@ uint64_t DES::encrypt(uint64_t m)
 
 	utils::print_uint64(c);
 
-	std::cout << "END\n";
+//	std::cout << "END\n";
 
 	return c;
 }
@@ -71,7 +71,7 @@ uint64_t DES::decrypt(uint64_t c)
 
 	for(int i=15; i>=0; --i)
 	{
-		std::cout << "ROUND i: " << i << "\t";
+//		std::cout << "ROUND i: " << i << "\t";
 
 		round((int8_t)i,m);
 
